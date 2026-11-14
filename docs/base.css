@@ -13,6 +13,8 @@
   --grey: #888888;
   --rule: #A5A59F;
   --tint: #DCDCD0;
+  --amber: #C27A00; /* second accent: unknown item that needs verifying (demo app only) */
+  --red: #D92B1F;   /* the one accent: food about to expire (demo app only) */
   --font: "Bricolage Grotesque", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   --ease: cubic-bezier(.2, .7, .2, 1);
 }

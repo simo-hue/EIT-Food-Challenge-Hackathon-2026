@@ -82,7 +82,13 @@
   <section class="section" id="app">
     <p class="label">The app</p>
     <h2 class="wide">Know what you have. Cook it before it goes.</h2>
-    <figure class="full"><img decoding="async" src="assets/app-screens.webp" width="1500" height="768" alt="Three app screens: Fridge, Cook and Stats"></figure>
+    <figure class="full full-wide"><img loading="lazy" decoding="async" src="assets/app-screens.webp" width="1500" height="768" alt="Three app screens: Fridge, Cook and Stats"></figure>
+    <div class="swipe" role="group" aria-label="App screens, swipe sideways">
+      <img decoding="async" src="assets/screen-fridge.webp" width="639" height="897" alt="Fridge screen: items sorted by days left">
+      <img decoding="async" src="assets/screen-cook.webp" width="461" height="897" alt="Cook screen: a recipe from what you have">
+      <img decoding="async" src="assets/screen-stats.webp" width="652" height="897" alt="Stats screen: money saved and streak">
+    </div>
+    <p class="swipe-hint">Swipe to see more</p>
     <ul class="features">
       <li><h3>Fridge</h3><p>Everything you have, sorted by what expires first, with a warning before food goes off.</p></li>
       <li><h3>Cook</h3><p>Meals from what is already in the fridge, starting with what expires soonest.</p></li>
@@ -138,12 +144,27 @@
 
 </main>
 
+<a class="dock" id="dock" href="app/" aria-hidden="true" tabindex="-1">Try the demo
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+</a>
+
 <footer class="foot">
   <span>EIT Food Challenge Labs Hungary 2026</span>
   <span>Budapest</span>
 </footer>
 
 <script>
+  // Phone only: keep "Try the demo" within thumb reach once the hero button scrolls away.
+  (function () {
+    var dock = document.getElementById("dock"), cta = document.querySelector(".hero-cta .btn");
+    if (!dock || !cta || !("IntersectionObserver" in window)) return;
+    new IntersectionObserver(function (e) {
+      var on = !e[0].isIntersecting;
+      dock.classList.toggle("show", on);
+      dock.setAttribute("aria-hidden", on ? "false" : "true");
+      dock.tabIndex = on ? 0 : -1;
+    }).observe(cta);
+  })();
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
   }

@@ -198,3 +198,79 @@ figure { margin: 0; }
   .foot { margin-inline: auto; }
   h1 { font-size: 184px; }
 }
+
+/* ---------- phone layout (most visitors arrive by QR code) ---------- */
+.swipe, .swipe-hint, .dock { display: none; }
+
+@media (max-width: 819px) {
+  h1 { font-size: clamp(64px, 22.5vw, 120px); margin-top: 14px; margin-bottom: 18px; }
+  h2 { font-size: clamp(34px, 9.6vw, 56px); }
+  .label { font-size: 24px; padding-top: 16px; margin-bottom: 26px; }
+  .top { padding-bottom: 8px; }
+  .hero { padding-top: 14px; padding-bottom: 56px; }
+  .hero .oval { margin-top: 20px; font-size: 15px; padding: .7em 1.4em; }
+  .hero-cta { margin-top: 22px; }
+  .hero-cta .btn { flex: 1 1 100%; justify-content: space-between; min-height: 60px; }
+  .hero-art { margin: 18px calc(var(--pad) * -1) 0; }
+  .section { padding-bottom: 72px; }
+  .split { gap: 28px; }
+
+  /* illustrations run edge to edge so their small lettering stays readable */
+  .split figure { margin-inline: calc(var(--pad) * -1); }
+  .split figure img { width: 100%; }
+  #problem .split figure, #price .split figure { padding-inline: 10px; }
+  #impact .split figure { padding-inline: 34px; }
+  /* text first, picture second, in every section */
+  .split-rev figure { order: 2; }
+  #how .split-rev figure { order: 0; }
+
+  .number { gap: 16px; margin-top: 26px; }
+  .number p { font-size: 16px; }
+  .circle { width: 104px; height: 104px; }
+  .circle b { font-size: 42px; }
+  .circle-wide { width: 148px; }
+  .circle-wide b { font-size: 30px; }
+  .steps { margin-top: 26px; }
+  .steps li { grid-template-columns: 40px 1fr; padding: 16px 0; }
+
+  /* app screens: one phone at a time, swipe sideways */
+  .full-wide { display: none; }
+  .swipe {
+    display: flex; gap: 6px;
+    margin: 26px calc(var(--pad) * -1) 0;
+    padding-inline: var(--pad);
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--pad);
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .swipe::-webkit-scrollbar { display: none; }
+  .swipe img { flex: none; height: min(108vw, 440px); width: auto; max-width: none; scroll-snap-align: center; }
+  .swipe-hint { display: block; color: var(--grey); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .09em; margin: 10px 0 26px; }
+  .features { margin-bottom: 28px; }
+  .features h3 { font-size: 28px; }
+  #app > .btn { width: 100%; justify-content: space-between; min-height: 60px; }
+
+  .team { gap: 10px; }
+  .oval-lg { font-size: 30px; }
+  .foot { padding-bottom: calc(max(28px, env(safe-area-inset-bottom)) + 76px); }
+
+  /* docked demo button */
+  .dock {
+    position: fixed; z-index: 10;
+    left: max(14px, env(safe-area-inset-left)); right: max(14px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 58px; padding: 0 26px;
+    background: var(--ink); color: var(--cream);
+    border-radius: 999px; outline: 3px solid var(--cream);
+    font-weight: 500; font-size: 17px; text-decoration: none;
+    transform: translateY(160%);
+    transition: transform .4s var(--ease);
+  }
+  .dock svg { width: 20px; height: 20px; }
+  .dock.show { transform: none; }
+}
+@media (max-width: 359px) {
+  :root { --pad: 18px; }
+  .number { flex-direction: column; align-items: flex-start; }
+}
